@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            letter-spacing: 2px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        #fraud {
+            margin-bottom: 100px;
+        }
+        #fraud th{
+            color: red;
+        }
+        #non-fraud th {
+            color: green;
+        }
+        a{
+            color: black;
+            text-decoration: none;
+        }
+    </style>
+    <title>Demo</title>
+</head>
+<body>
+    <h1>Real-time Credit Card Fraud Detection</h1>
+    <table id="fraud">
+        <tr>
+            <th>Time</th>
+            <th>V1</th>
+            <th>V2</th>
+            <th>V3</th>
+            <th>...</th>
+            <th>V27</th>
+            <th>V28</th>
+            <th>Amount</th>
+            <th>is_fraud</th>
+        </tr>
+        {% for row in data %}
+            {% if row[30] == 1.0 %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>{{ row[3] }}</td>
+                    <td>...</td>
+                    <td>{{ row[27] }}</td>
+                    <td>{{ row[28] }}</td>
+                    <td>{{ row[29] }}</td>
+                    <td>{{ row[30] }}</td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+
+    <table id="non-fraud">
+        <tr>
+            <th>Time</th>
+            <th>V1</th>
+            <th>V2</th>
+            <th>V3</th>
+            <th>...</th>
+            <th>V27</th>
+            <th>V28</th>
+            <th>Amount</th>
+            <th>is_fraud</th>
+        </tr>
+        {% for row in data %}
+            {% if row[30] == 0.0 %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>{{ row[3] }}</td>
+                    <td>...</td>
+                    <td>{{ row[27] }}</td>
+                    <td>{{ row[28] }}</td>
+                    <td>{{ row[29] }}</td>
+                    <td>{{ row[30] }}</td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+    <script>
+        setInterval(function() {
+            location.reload(true);
+        }, 10000);
+    </script>
+</body>
+</html>
